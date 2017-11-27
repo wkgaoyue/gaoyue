@@ -1,0 +1,75 @@
+{% extends "myadmin/base.html" %}
+
+{% block mainbody %}                
+    <h4>
+        商品信息管理
+    </h4>
+     <form action="{% url 'myadmin_goodsindex' 1 %}" method="get">
+        <span>商品名称:</span> <input type="text" class="search-query span2" placeholder="请输入" size="6" name="goods" value="{{request.GET.goods}}"/>
+        <input type="submit" value="搜索"/>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>id号</th>
+                <th>商品名称</th>
+                <th>商品类别</th>
+                <th>图片</th>
+                <th>单价</th>
+                <th>点击量</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vo in goodslist %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{ vo.goods }}</td>
+                <td>{{ vo.typename }}</td>
+                <td><img src="/static/goods/s_{{ vo.picname }}" width="60"/></td>
+                <td>{{ vo.price }}</td>
+                <td>{{ vo.clicknum }}</td>
+                <td>
+                    {% if vo.state == 1 %}
+                        新添加
+                    {% elif vo.state == 2 %}
+                        在售
+                    {% else %}
+                        下架
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'myadmin_goodsdel' vo.id %}" class="view-link">删除</a>
+                    <a href="{% url 'myadmin_goodsedit' vo.id %}" class="view-link">编辑</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     <center>
+    <div class="pagination">
+        <ul>
+            <li class="disabled">
+                <a href="#">&laquo;</a>
+            </li>
+            {%for gindex in glist%}
+                {%if gIndex == gindex %}
+                    <li class="active"><a href="/myadmin/goods/{{gindex}}?{{who|join:'&'}}">{{gindex}}</a>
+                {%else%}
+                    <li><a href="/myadmin/goods/{{gindex}}?{{who|join:'&'}}">{{gindex}}</a>
+
+                {%endif%}
+                </li>
+            {%endfor%}
+            <li class="disabled">
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+    </center>
+   
+
+
+
+{% endblock %}

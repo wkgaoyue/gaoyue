@@ -1,0 +1,54 @@
+{% extends 'myweb/shoporder.html' %}
+{% load static from staticfiles %}
+{% block mainbody %}
+
+{% for order in request.session.orderlist.values %}
+<tr class="list-box b-l b-r b-b">
+	<td class="list b-r j-iamCart">
+		<div class="cart-wrap j-CartWrap">
+			<div class="shop j-shop j-amLight">
+				<div class="item b-t clearfix j-item j-iamMain">
+					<a class="productDetail nameWidth col-xs-4 col-sm-4" href="#" target="_blank">
+						<img src="/static/goods/s_{{ order.picname }}" class="f-fl">
+					</a>
+					<div class="describe f-fl col-xs-8 col-sm-8">
+						<div class="vertic clearfix">
+							<span class="clearfix">
+								<a class="productDetail nameWidth" href="#" target="_blank">
+								<i>{{order.goods}}</i> <i class="pro-d">红色</i></a>
+								<p>
+								￥399×1
+								</p>
+							</span>
+						</div>
+					</div>
+					<input class="orderSn" value="51090244361541573081" type="hidden">
+					<input class="isCart" value="1" type="hidden">
+					<input class="orderSnSon" value="21090244361541575081" type="hidden">
+				</div>
+				
+			</div>
+		</div>
+	</td>
+	<td class="b-r w125 center price b-t hidden-xs hidden-sm">
+		<div class="priceDiv">
+			{{order.price}}
+			
+		</div>
+	</td>
+
+	<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+		<div class="stateDiv">
+			   <div>新订单<br></div>
+			  
+		</div>
+	</td>
+	<td class="w125 center opreat b-t hidden-xs hidden-sm">
+		<ul>
+			<li class="more"><a href="#" target="_blank">查看详情</a></li>
+		</ul>
+	</td>
+
+</tr>
+{% endfor %}
+{% endblock %}

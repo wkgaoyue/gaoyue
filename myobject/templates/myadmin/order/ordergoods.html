@@ -1,0 +1,27 @@
+{% extends "myadmin/base.html" %}
+
+{% block mainbody %}                
+    <h4>订单详情信息</h4>
+
+    <form id="edit-profile" action="{% url 'myadmin_detailupdate'  %}" class="form-horizontal" method="post">
+        <input type="hidden" name="id" value="{{order.id}}"/>
+        {% csrf_token %}
+            
+        <!-- <div class="control-group"> -->
+            <label class="control-label" for="input01">状态：</label>
+            <!-- <div class="controls"> -->
+                <!-- <input type="text" name="status" value="2"> --> 
+                <input type="radio" name="status " {% if order.status  == 0 %}checked{% endif %} class="input-xlarge"  value="0" /> 新订单  
+                <input type="radio" name="status " {% if order.status  == 1 %}checked{% endif %} class="input-xlarge"  value="1" /> 已发货 
+                <input type="radio" name="status " {% if order.status  == 2 %}checked{% endif %} class="input-xlarge"  value="2" /> 已收货 
+                <input type="radio" name="status " {% if order.status  == 3 %}checked{% endif %} class="input-xlarge"  value="3" /> 无效订单 
+            <!-- </div> -->
+        <!-- </div>  -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button> <button type="reset" class="btn">重置</button>
+        </div>
+        
+        
+    </form>
+
+{% endblock %}

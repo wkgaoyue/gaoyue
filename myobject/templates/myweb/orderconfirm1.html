@@ -1,0 +1,48 @@
+{% extends 'myweb/shoporder.html' %}
+{% load static from staticfiles %}
+{% block mainbody %}
+<center>  
+<form id="edit-profile" action="{% url 'orderinsert' %}" class="form-horizontal" method="post">
+    
+    {% csrf_token %}
+    <fieldset>
+        <legend>编辑订单信息</legend>
+        <h2>请确认订单</h2>
+        <div class="control-group">
+            <label class="control-label" for="input01">联系人：</label>
+            <div class="controls">
+                <input type="text" name="linkman" class="input-xlarge" id="input01" value="{{ request.session.vipuser.name}}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">地址：</label>
+            <div class="controls">
+                <input type="text" name="address" class="input-xlarge" id="input01" value="{{ request.session.vipuser.address}}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">邮编：</label>
+            <div class="controls">
+                <input type="text" name="code" class="input-xlarge" id="input01" value="{{ request.session.vipuser.code}}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">电话：</label>
+            <div class="controls">
+                <input type="text" name="phone" class="input-xlarge" id="input01" value="{{ request.session.vipuser.phone}}" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="input01">总金额：</label>
+            <div class="controls">
+                {{ request.session.total}}
+            </div>
+        </div>
+                       
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button> <button type="reset" class="btn">重置</button>
+        </div>
+    </fieldset>
+</form>
+  </center>
+{% endblock %}
